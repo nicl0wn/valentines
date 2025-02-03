@@ -89,6 +89,57 @@
             height: auto;
             border-radius: 15px;
         }
+
+        .image-choice {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .left-side {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .right-side {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative; /* Ensure that we can position text over the image */
+            flex-direction: column; /* Stack text and image vertically */
+        }
+
+        .right-side h3 {
+            font-size: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Optional: Add a shadow for readability */
+            margin-bottom: 10px; /* Space between the text and the image */
+        }
+
+        .left-side h3 {
+            font-size: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Optional: Add a shadow for readability */
+            margin-bottom: 10px; /* Space between the text and the image */
+        }
+
+        .right-side img {
+            width: 200px; /* Adjust the size of the image */
+            height: 200px;
+            border-radius: 10px;
+        }
+
+        .image-choice img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -101,11 +152,24 @@
     <div class="slide">So here’s my question,<br>Simple and clear:</div>
     <div class="slide">Will you be my Valentine,<br>This year and every year?
         <div class="valentine-question">
-            <input type="button" value="Yes, I will!" onclick="showGift()">
+            <input type="button" value="Yes, I will!" onclick="showImageChoices()">
         </div>
     </div>
 
-    <div class="gift" style="text-align: center;">
+    <div class="image-choice" style="display: none;">
+        <div class="left-side">
+            <h2>Choose menu:</h2>
+            <h3>A la carte menu</h3>
+            <img src="media/ala carte 1.png" alt="Left 1" onclick="showGift()">
+            <img src="media/ala carte 2.png" alt="Left 2" onclick="showGift()">
+        </div>
+        <div class="right-side">
+            <h3>Valentine's course meal</h3>
+            <img src="media/coursemeal.jpg" alt="Right" onclick="showGift()">
+        </div>
+    </div>
+
+    <div class="gift" style="display: none;">
         <h1>Yay!!! We will have dinner at Fico, ECP<br>14 Feb 2025<br>8.30 PM</h1>
         <img src="media/fico-terrace.jpg" alt="Valentine's Gift">
     </div>
@@ -130,9 +194,9 @@
             }, 4000); // Change slide every 4 seconds
         }
 
-        function showGift() {
-            const giftElement = document.querySelector('.gift'); // Select the gift element
+        function showImageChoices() {
             const question = document.querySelector('.valentine-question'); // Select the question box
+            const imageChoice = document.querySelector('.image-choice'); // Select the image choice section
 
             slides.forEach(slide => {
                 slide.style.display = "none"; // Hide all slides
@@ -142,6 +206,14 @@
                 question.style.display = "none"; // Hide the question box
             }
 
+            imageChoice.style.display = "flex"; // Show the image choice section
+        }
+
+        function showGift() {
+            const giftElement = document.querySelector('.gift'); // Select the gift element
+            const imageChoice = document.querySelector('.image-choice'); // Select the image choice section
+
+            imageChoice.style.display = "none"; // Hide the image choice section
             giftElement.style.display = "block"; // Show the gift element
         }
     </script>
