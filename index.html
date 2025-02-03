@@ -11,10 +11,29 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background: #FFB6C1 ;
+            background: #FFB6C1;
             color: #fff;
             overflow: hidden;
             text-align: center;
+        }
+
+        .begin {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff4d6d;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .begin:hover {
+            background-color: #ff1f45;
         }
 
         .slide {
@@ -25,9 +44,11 @@
             opacity: 0;
             font-size: 1.5rem;
             transition: opacity 1.5s ease;
+            display: none; /* Initially hide all slides */
         }
 
         .slide.active {
+            display: block;
             opacity: 1;
         }
 
@@ -71,7 +92,9 @@
     </style>
 </head>
 <body>
-    <div class="slide active">The stars shine bright,<br>But not as bright as you.</div>
+    <button class="begin" onclick="startSlideshow()">Begin</button>
+
+    <div class="slide">The stars shine bright,<br>But not as bright as you.</div>
     <div class="slide">Every moment with you<br>Feels magical and true.</div>
     <div class="slide">Your laugh is my favorite sound,<br>Your smile, my favorite view.</div>
     <div class="slide">With you, my world is complete—<br>There’s nothing I’d rather do.</div>
@@ -90,37 +113,37 @@
     <script>
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
-    
-        function showNextSlide() {
-            slides[currentSlide].classList.remove('active');
-            if (currentSlide < slides.length - 1) {
-                currentSlide++;
-                slides[currentSlide].classList.add('active');
-            }
+
+        function startSlideshow() {
+            document.querySelector('.begin').style.display = 'none'; // Hide the Begin button
+            slides[currentSlide].style.display = 'block'; // Show the first slide
+            slides[currentSlide].classList.add('active');
+
+            setInterval(() => {
+                if (currentSlide < slides.length - 1) {
+                    slides[currentSlide].classList.remove('active');
+                    slides[currentSlide].style.display = 'none'; // Hide the current slide
+                    currentSlide++;
+                    slides[currentSlide].style.display = 'block'; // Show the next slide
+                    slides[currentSlide].classList.add('active');
+                }
+            }, 4000); // Change slide every 4 seconds
         }
-    
-        setInterval(() => {
-            if (currentSlide < slides.length - 1) {
-                showNextSlide();
-            }
-        }, 4000); // Change slide every 4 seconds
-    
+
         function showGift() {
-    const slides = document.querySelectorAll('.slide'); // Select all slides
-    const giftElement = document.querySelector('.gift'); // Select the gift element
-    const question = document.querySelector('.valentine-question'); // Select the question box
+            const giftElement = document.querySelector('.gift'); // Select the gift element
+            const question = document.querySelector('.valentine-question'); // Select the question box
 
-    slides.forEach(slide => {
-        slide.style.display = "none"; // Hide all slides
-    });
+            slides.forEach(slide => {
+                slide.style.display = "none"; // Hide all slides
+            });
 
-    if (question) {
-        question.style.display = "none"; // Hide the question box
-    }
+            if (question) {
+                question.style.display = "none"; // Hide the question box
+            }
 
-    giftElement.style.display = "block"; // Show the gift element
-}
-
+            giftElement.style.display = "block"; // Show the gift element
+        }
     </script>
 </body>
 </html>
