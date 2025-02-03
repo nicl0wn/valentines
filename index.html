@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #FFB6C1 ;
+            color: #fff;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .slide {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            font-size: 1.5rem;
+            transition: opacity 1.5s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .valentine-question {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .valentine-question input {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff4d6d;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .valentine-question input:hover {
+            background-color: #ff1f45;
+        }
+
+        .gift {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+        }
+
+        .gift img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide active">The stars shine bright,<br>But not as bright as you.</div>
+    <div class="slide">Every moment with you<br>Feels magical and true.</div>
+    <div class="slide">Your laugh is my favorite sound,<br>Your smile, my favorite view.</div>
+    <div class="slide">With you, my world is complete—<br>There’s nothing I’d rather do.</div>
+    <div class="slide">So here’s my question,<br>Simple and clear:</div>
+    <div class="slide">Will you be my Valentine,<br>This year and every year?
+        <div class="valentine-question">
+            <input type="button" value="Yes, I will!" onclick="showGift()">
+        </div>
+    </div>
+
+    <div class="gift" style="text-align: center;">
+        <h1>Yay!!! We will have dinner at Fico, ECP<br>14 Feb 2025<br>8.30 PM</h1>
+        <img src="media/fico-terrace.jpg" alt="Valentine's Gift">
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+    
+        function showNextSlide() {
+            slides[currentSlide].classList.remove('active');
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                slides[currentSlide].classList.add('active');
+            }
+        }
+    
+        setInterval(() => {
+            if (currentSlide < slides.length - 1) {
+                showNextSlide();
+            }
+        }, 4000); // Change slide every 4 seconds
+    
+        function showGift() {
+    const slides = document.querySelectorAll('.slide'); // Select all slides
+    const giftElement = document.querySelector('.gift'); // Select the gift element
+    const question = document.querySelector('.valentine-question'); // Select the question box
+
+    slides.forEach(slide => {
+        slide.style.display = "none"; // Hide all slides
+    });
+
+    if (question) {
+        question.style.display = "none"; // Hide the question box
+    }
+
+    giftElement.style.display = "block"; // Show the gift element
+}
+
+    </script>
+</body>
+</html>
